@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Minesweeper</string>
+    <string name="game_title">Minesweeper Game</string>
+    <string name="restart_game">Restart Game</string>
+    <string name="bomb">💣</string>
+    <string name="flag">🚩</string>
+    <string name="looser">You Loose!</string>
+    <string name="winner">You Won!</string>
+    <string name="one_bomb">0️⃣</string>
+</resources>

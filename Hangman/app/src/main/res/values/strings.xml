@@ -1,0 +1,111 @@
+<resources>
+
+    <string name="app_name">Hangman</string>
+    <string name="winner">You Won!</string>
+    <string name="looser">You Loose!</string>
+    <string name="new_game">New Game</string>
+
+    <string-array name="dictionary">
+        <item>ALGORITHM</item>
+        <item>APPLICATION</item>
+        <item>ARCHITECTURE</item>
+        <item>ARRAY</item>
+        <item>ARTIFICIAL INTELLIGENCE</item>
+        <item>ASSEMBLY LANGUAGE</item>
+        <item>BINARY</item>
+        <item>MACHINE LEARNING</item>
+        <item>BOOLEAN</item>
+        <item>BROWSER</item>
+        <item>BYTE</item>
+        <item>CACHE</item>
+        <item>CLIENT</item>
+        <item>CLOUD COMPUTING</item>
+        <item>CODE</item>
+        <item>COMPILER</item>
+        <item>COMPUTER</item>
+        <item>COMPUTER GRAPHICS</item>
+        <item>COMPUTER SCIENCE</item>
+        <item>CRYPTOGRAPHY</item>
+        <item>CYBER SECURITY</item>
+        <item>DATA</item>
+        <item>DATA ANALYSIS</item>
+        <item>DATA MINING</item>
+        <item>DATABASE</item>
+        <item>DEBUGGING</item>
+        <item>DESKTOP</item>
+        <item>DIGITAL</item>
+        <item>DISTRIBUTED COMPUTING</item>
+        <item>ENCRYPTION</item>
+        <item>FIREWALL</item>
+        <item>FIRMWARE</item>
+        <item>FLOPPY DISK</item>
+        <item>FUNCTION</item>
+        <item>GRAPH</item>
+        <item>HACKER</item>
+        <item>HARD DRIVE</item>
+        <item>HASH TABLE</item>
+        <item>INPUT</item>
+        <item>INTEGER</item>
+        <item>INTERFACE</item>
+        <item>INTERNET</item>
+        <item>INTERPRETER</item>
+        <item>IP ADDRESS</item>
+        <item>JAVA</item>
+        <item>JAVASCRIPT</item>
+        <item>KERNEL</item>
+        <item>KEYBOARD</item>
+        <item>LIBRARY</item>
+        <item>LINUX</item>
+        <item>LOGIC</item>
+        <item>LOGIC GATE</item>
+        <item>LOOP</item>
+        <item>MACHINE CODE</item>
+        <item>MACRO</item>
+        <item>MAINFRAME</item>
+        <item>MEMORY</item>
+        <item>METADATA</item>
+        <item>MICROPROCESSOR</item>
+        <item>MIDDLEWARE</item>
+        <item>MODEM</item>
+        <item>MONITOR</item>
+        <item>MOUSE</item>
+        <item>NETWORK</item>
+        <item>NODE</item>
+        <item>OBJECT</item>
+        <item>OPERATING SYSTEM</item>
+        <item>OUTPUT</item>
+        <item>OVERFLOW</item>
+        <item>PACKET</item>
+        <item>PASSWORD</item>
+        <item>PIXEL</item>
+        <item>PLATFORM</item>
+        <item>PORT</item>
+        <item>PROGRAM</item>
+        <item>PROTOCOL</item>
+        <item>PYTHON</item>
+        <item>RECURSION</item>
+        <item>REGISTER</item>
+        <item>REGULAR EXPRESSION</item>
+        <item>ROUTER</item>
+        <item>RUBY</item>
+        <item>SCANNER</item>
+        <item>SCRIPT</item>
+        <item>SEARCH ENGINE</item>
+        <item>SECURITY</item>
+        <item>SOFTWARE</item>
+        <item>STACK</item>
+        <item>VARIABLE</item>
+        <item>SERVER</item>
+        <item>SOFTWARE ENGINEERING</item>
+        <item>SOURCE CODE</item>
+        <item>SQL INJECTION</item>
+        <item>STORAGE</item>
+        <item>SYNTAX</item>
+        <item>SYSTEM CALL</item>
+        <item>TERMINAL</item>
+        <item>VIRTUAL MACHINE</item>
+        <item>BLOCKCHAIN</item>
+        <item>CLOUD STORAGE</item>
+    </string-array>
+
+</resources>

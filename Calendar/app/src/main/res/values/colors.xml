@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="taupe">#4A4238</color>
+    <color name="davy_s_gray">#4D5359</color>
+    <color name="myrtle_green">#508484</color>
+    <color name="mint">#79C99E</color>
+    <color name="yellow_green">#97DB4F</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

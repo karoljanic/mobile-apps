@@ -7,4 +7,10 @@
     <string name="thursday">THUR</string>
     <string name="friday">FRI</string>
     <string name="saturday">SAT</string>
+    <string name="add_new_event">Add New Event</string>
+    <string name="create_new_event">Create New Event</string>
+    <string name="creating_new_event">Creating New Event</string>
+    <string name="name">Name</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_time">Event Time</string>
 </resources>

@@ -1,36 +1,42 @@
 package com.example.calendar
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calendar.calendar.CalendarAdapter
+import com.example.calendar.calendar.CalendarUtils
+import com.example.calendar.calendar.CalendarRecyclerViewInterface
+import com.example.calendar.event.EventsRepository
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
+import java.time.Period
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity(), RecyclerViewInterface {
+class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
     private lateinit var calendarRecyclerView : RecyclerView
     private lateinit var monthYearText : MaterialTextView
-    private lateinit var currentDate: LocalDate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        EventsRepository.initialize()
+        CalendarUtils.currentDate = LocalDate.now()
+
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         monthYearText = findViewById(R.id.monthYearText)
-        currentDate = LocalDate.now()
 
         setMonthView()
     }
 
     private fun setMonthView() {
-        monthYearText.text = monthYearFromDate(currentDate)
-        val daysInMonth: ArrayList<String> = generateDaysInMonth(currentDate)
+        monthYearText.text = CalendarUtils.monthYearFromDate(CalendarUtils.currentDate)
+        val daysInMonth: ArrayList<LocalDate?> = CalendarUtils.generateDaysInMonth(CalendarUtils.currentDate)
 
         val calendarAdapter = CalendarAdapter(daysInMonth, this)
 
@@ -39,39 +45,23 @@ class MainActivity : AppCompatActivity(), RecyclerViewInterface {
         calendarRecyclerView.adapter = calendarAdapter
     }
 
-    private fun generateDaysInMonth(date: LocalDate): ArrayList<String> {
-        val daysInMonthArray: ArrayList<String> = ArrayList()
-        val yearMonth: YearMonth = YearMonth.from(date)
-        val daysInMonth: Int = yearMonth.lengthOfMonth()
-        val firstOfMonth: LocalDate = date.withDayOfMonth(1)
-        val dayOfWeek = firstOfMonth.dayOfWeek.value
-
-        for (i in 1..42) {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
-                daysInMonthArray.add("")
-            } else {
-                daysInMonthArray.add((i - dayOfWeek).toString())
-            }
-        }
-        return daysInMonthArray
-    }
-
-    private fun monthYearFromDate(date: LocalDate): String? {
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
-        return date.format(formatter)
-    }
-
     fun previousMonth(view: View) {
-        currentDate = currentDate.minusMonths(1)
+        CalendarUtils.currentDate = CalendarUtils.currentDate.minus(Period.ofMonths(1))
         setMonthView()
     }
 
     fun nextMonth(view: View) {
-        currentDate = currentDate.plusMonths(1)
+        CalendarUtils.currentDate = CalendarUtils.currentDate.plus(Period.ofMonths(1))
         setMonthView()
     }
 
-    override fun onClickPosition(position: Int) {
-        Toast.makeText(this@MainActivity, "$position", Toast.LENGTH_LONG).show()
+    override fun onClickPosition(position: Int, localDate: LocalDate?) {
+        if(localDate != null) {
+            val intent: Intent = Intent(this@MainActivity, OneDayActivity::class.java)
+
+            intent.putExtra("date", localDate.toString())
+
+            startActivity(intent)
+        }
     }
 }

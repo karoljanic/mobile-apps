@@ -45,12 +45,16 @@ class EventsListAdapter(
         holder.eventRating.rating = event.rating.toFloat()
 
         holder.eventRating.setOnRatingBarChangeListener { _, rating, _ ->
-            EventsRepository.updateRating(event.id, rating.toInt())
+            eventsListRecyclerViewInterface.updateEventRating(position, event, rating.toInt())
         }
 
         holder.deleteEvent.setOnClickListener {
-            EventsRepository.remove(event)
-            eventsListRecyclerViewInterface.redrawLayout()
+            events.remove(event)
+            eventsListRecyclerViewInterface.removeEvent(position, event)
+        }
+
+        holder.reminderEvent.setOnClickListener {
+            eventsListRecyclerViewInterface.setEventReminder(position, event)
         }
 
         if(position % 2 == 0)

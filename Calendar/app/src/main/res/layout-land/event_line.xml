@@ -28,17 +28,37 @@
             android:orientation="horizontal">
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/deleteEventButton"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="previousMonth"
-                app:icon="@drawable/icon_delete_24"
-                app:iconGravity="textStart"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/deleteEventButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:onClick="previousMonth"
+                    app:icon="@drawable/icon_delete_24"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reminderEventButton"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    app:icon="@drawable/icon_notification_active_24"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp" />
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -56,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -64,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -72,6 +94,8 @@
                 android:id="@+id/eventRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="fill_horizontal|fill_vertical"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:stepSize="1"

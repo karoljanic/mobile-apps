@@ -1,19 +1,24 @@
 package com.example.calendar
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calendar.calendar.CalendarAdapter
-import com.example.calendar.calendar.CalendarUtils
 import com.example.calendar.calendar.CalendarRecyclerViewInterface
+import com.example.calendar.calendar.CalendarUtils
+import com.example.calendar.event.Event
 import com.example.calendar.event.EventsRepository
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDate
 import java.time.Period
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
@@ -24,13 +29,21 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        EventsRepository.initialize()
+        if(savedInstanceState != null) {
+            val events: ArrayList<Event> = savedInstanceState.getParcelableArrayList("events")!!
+            EventsRepository.initialize(events)
+        }
+        else
+            EventsRepository.initialize()
+
         CalendarUtils.currentDate = LocalDate.now()
 
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         monthYearText = findViewById(R.id.monthYearText)
 
         setMonthView()
+
+        createNotificationChannel()
     }
 
     override fun onRestart() {
@@ -43,6 +56,21 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
         super.onResume()
 
         setMonthView()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run {
+            putParcelableArrayList("events", EventsRepository.getAll())
+        }
+
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        val events: ArrayList<Event> = savedInstanceState.getParcelableArrayList("events")!!
+        EventsRepository.initialize(events)
+
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun setMonthView() {
@@ -74,5 +102,17 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
 
             startActivity(intent)
         }
+    }
+
+    private fun createNotificationChannel() {
+        val name: CharSequence = "CalendarReminderChannel"
+        val description = "Channel For Reminder Manager"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel("calendarapp", name, importance)
+        channel.description = description
+        val notificationManager = getSystemService(
+            NotificationManager::class.java
+        )
+        notificationManager.createNotificationChannel(channel)
     }
 }

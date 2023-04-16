@@ -15,14 +15,15 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.Icon"
             android:id="@+id/previousMonthButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="previousMonth"
             app:icon="@drawable/icon_arrow_back_24"
             app:iconGravity="textStart"
-            android:onClick="previousMonth"/>
+            app:iconPadding="0dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/monthYearText"
@@ -36,14 +37,15 @@
             app:backgroundTint="@color/white"/>
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.Icon"
             android:id="@+id/nextMonthButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="nextMonth"
             app:icon="@drawable/icon_arrow_forward_24"
-            app:iconGravity="textEnd"
-            android:onClick="nextMonth"/>
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
 
     </LinearLayout>
 

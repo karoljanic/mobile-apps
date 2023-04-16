@@ -26,6 +26,7 @@ class EventsListViewHolder(
     var eventTime: MaterialTextView = view.findViewById(R.id.eventTime)
     var eventRating: RatingBar = view.findViewById(R.id.eventRating)
     var deleteEvent: MaterialButton = view.findViewById(R.id.deleteEventButton)
+    var reminderEvent: MaterialButton = view.findViewById(R.id.reminderEventButton)
 
     init {
         view.setOnClickListener {

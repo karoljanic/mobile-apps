@@ -36,6 +36,18 @@ class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
         setEventsListView()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+
+        setEventsListView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setEventsListView()
+    }
+
     private fun setEventsListView() {
         val events: ArrayList<Event> = EventsRepository.get(date) as ArrayList<Event>
         val eventsListAdapter = EventsListAdapter(events, this)
@@ -46,6 +58,12 @@ class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
     }
 
     override fun onClickPosition(position: Int, event: Event) {
+        EventsRepository.updateRating(event.id, 3)
+        setEventsListView()
+    }
+
+    override fun redrawLayout() {
+        setEventsListView()
     }
 
     fun addEvent(view: View) {

@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calendar.R
 import com.example.calendar.calendar.CalendarUtils
 import com.example.calendar.event.Event
+import com.example.calendar.event.EventsRepository
 import kotlin.math.roundToInt
 
 class EventsListAdapter(
     private val events: ArrayList<Event>,
-    private val eventsListRecyclerViewInterface: EventsListRecyclerViewInterface
+    private val eventsListRecyclerViewInterface: EventsListRecyclerViewInterface,
+
 ) : RecyclerView.Adapter<EventsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {
@@ -34,6 +36,15 @@ class EventsListAdapter(
         holder.eventTitle.text = event.name
         holder.eventTime.text = CalendarUtils.hoursMinutesFromTime(event.localTime)
         holder.eventRating.rating = event.rating.toFloat()
+
+        holder.eventRating.setOnRatingBarChangeListener { _, rating, _ ->
+            EventsRepository.updateRating(event.id, rating.toInt())
+        }
+
+        holder.deleteEvent.setOnClickListener {
+            EventsRepository.remove(event)
+            eventsListRecyclerViewInterface.redrawLayout()
+        }
 
         if(position % 2 == 0)
             holder.eventCard.setBackgroundResource(R.color.davy_s_gray)

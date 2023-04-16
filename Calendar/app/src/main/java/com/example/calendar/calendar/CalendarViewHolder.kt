@@ -4,6 +4,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calendar.R
+import com.google.android.material.bottomsheet.BottomSheetDragHandleView
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDate
 
@@ -15,6 +16,7 @@ class CalendarViewHolder(
 
     var dayOfMonthLayout: ConstraintLayout = view.findViewById(R.id.cellLayout)
     var dayOfMonthText: MaterialTextView = view.findViewById(R.id.cellDayText)
+    var dayOfMonthBar: BottomSheetDragHandleView = view.findViewById(R.id.bar)
 
     init {
         view.setOnClickListener {

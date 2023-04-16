@@ -13,7 +13,6 @@ import com.example.calendar.event.EventsRepository
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDate
 import java.time.Period
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -30,6 +29,18 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
 
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         monthYearText = findViewById(R.id.monthYearText)
+
+        setMonthView()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        setMonthView()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         setMonthView()
     }

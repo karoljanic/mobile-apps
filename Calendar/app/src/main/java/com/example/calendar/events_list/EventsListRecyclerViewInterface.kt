@@ -4,4 +4,6 @@ import com.example.calendar.event.Event
 
 interface EventsListRecyclerViewInterface {
     fun onClickPosition(position: Int, event: Event)
+
+    fun redrawLayout()
 }

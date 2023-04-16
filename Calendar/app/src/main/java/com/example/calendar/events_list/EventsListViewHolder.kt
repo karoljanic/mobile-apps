@@ -1,5 +1,6 @@
 package com.example.calendar.events_list
 
+import android.util.Log
 import com.example.calendar.event.Event
 import android.view.View
 import android.widget.RatingBar
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calendar.R
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textview.MaterialTextView
@@ -23,6 +25,7 @@ class EventsListViewHolder(
     var eventTitle: MaterialTextView = view.findViewById(R.id.eventTitle)
     var eventTime: MaterialTextView = view.findViewById(R.id.eventTime)
     var eventRating: RatingBar = view.findViewById(R.id.eventRating)
+    var deleteEvent: MaterialButton = view.findViewById(R.id.deleteEventButton)
 
     init {
         view.setOnClickListener {
@@ -33,9 +36,5 @@ class EventsListViewHolder(
                 )
             }
         }
-
-       // eventRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-      //      ratingBar.rating = rating
-       // }
     }
 }

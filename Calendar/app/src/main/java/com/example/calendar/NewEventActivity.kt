@@ -49,13 +49,11 @@ class NewEventActivity : AppCompatActivity() {
             val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE)
 
             val timeString = timeField.text.toString()
-            val time = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("H:mm"))
+            val time = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("H:m"))
 
             EventsRepository.add(name,  date, time)
 
-            val intent = Intent(this@NewEventActivity, OneDayActivity::class.java)
-            intent.putExtra("date", dateString)
-            startActivity(intent)
+            finish()
         }
     }
 }

@@ -50,7 +50,8 @@ class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
 
     private fun setEventsListView() {
         val events: ArrayList<Event> = EventsRepository.get(date) as ArrayList<Event>
-        val eventsListAdapter = EventsListAdapter(events, this)
+        val eventsListAdapter = EventsListAdapter(
+            events, this, resources.configuration.orientation)
 
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
         eventsListRecyclerView.layoutManager = layoutManager

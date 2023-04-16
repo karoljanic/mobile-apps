@@ -1,5 +1,6 @@
 package com.example.calendar.events_list
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import kotlin.math.roundToInt
 class EventsListAdapter(
     private val events: ArrayList<Event>,
     private val eventsListRecyclerViewInterface: EventsListRecyclerViewInterface,
-
+    private val orientation: Int
 ) : RecyclerView.Adapter<EventsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {
@@ -21,7 +22,13 @@ class EventsListAdapter(
         val view: View = layoutInflater.inflate(R.layout.event_line, parent, false)
 
         val layoutParams: ViewGroup.LayoutParams = view.layoutParams
-        layoutParams.height = (parent.height / 3.0).roundToInt()
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutParams.height = (parent.height / 2.0).roundToInt()
+        } else {
+            layoutParams.height = (parent.height / 3.0).roundToInt()
+        }
+
 
         return EventsListViewHolder(view, eventsListRecyclerViewInterface, events)
     }

@@ -9,26 +9,20 @@ import com.example.calendar.R
 import com.example.calendar.calendar.CalendarUtils
 import com.example.calendar.event.Event
 import com.example.calendar.event.EventsRepository
+import java.time.LocalDate
 import kotlin.math.roundToInt
 
 class EventsListAdapter(
-    private val events: ArrayList<Event>,
     private val eventsListRecyclerViewInterface: EventsListRecyclerViewInterface,
-    private val orientation: Int
+    private val date: LocalDate
 ) : RecyclerView.Adapter<EventsListViewHolder>() {
+
+    private var events = emptyList<Event>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.event_line, parent, false)
-
-        val layoutParams: ViewGroup.LayoutParams = view.layoutParams
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            layoutParams.height = (parent.height / 2.0).roundToInt()
-        } else {
-            layoutParams.height = (parent.height / 3.0).roundToInt()
-        }
-
 
         return EventsListViewHolder(view, eventsListRecyclerViewInterface, events)
     }
@@ -49,7 +43,6 @@ class EventsListAdapter(
         }
 
         holder.deleteEvent.setOnClickListener {
-            events.remove(event)
             eventsListRecyclerViewInterface.removeEvent(position, event)
         }
 
@@ -61,5 +54,10 @@ class EventsListAdapter(
             holder.eventCard.setBackgroundResource(R.color.davy_s_gray)
         else
             holder.eventCard.setBackgroundResource(R.color.taupe)
+    }
+
+    fun setData(eventsList: List<Event>) {
+        events = eventsList.filter { event: Event -> event.localDate == date }
+        notifyDataSetChanged()
     }
 }

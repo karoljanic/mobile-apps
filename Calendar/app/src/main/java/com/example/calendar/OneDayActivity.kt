@@ -7,21 +7,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calendar.calendar.CalendarUtils
 import com.example.calendar.event.Event
-import com.example.calendar.event.EventsRepository
+import com.example.calendar.event.EventViewModel
 import com.example.calendar.events_list.EventsListAdapter
 import com.example.calendar.events_list.EventsListRecyclerViewInterface
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
@@ -29,6 +28,7 @@ class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
     private lateinit var dayTitleText: MaterialTextView
 
     private lateinit var date: LocalDate
+    private lateinit var eventViewModel: EventViewModel
 
     private var alarmManager: AlarmManager? = null
 
@@ -44,43 +44,31 @@ class OneDayActivity : AppCompatActivity(), EventsListRecyclerViewInterface {
 
         dayTitleText.text = CalendarUtils.dayMonthYearFromDate(date)
 
-        setEventsListView()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-
-        setEventsListView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        setEventsListView()
-    }
-
-    private fun setEventsListView() {
-        val events: ArrayList<Event> = EventsRepository.get(date) as ArrayList<Event>
-        val eventsListAdapter = EventsListAdapter(
-            events, this, resources.configuration.orientation
-        )
+        val eventsListAdapter = EventsListAdapter(this, date)
 
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
         eventsListRecyclerView.layoutManager = layoutManager
         eventsListRecyclerView.adapter = eventsListAdapter
+
+        eventViewModel = ViewModelProvider(this)[EventViewModel::class.java]
+
+        eventViewModel.readAllData.observe(this) { eventsList ->
+            eventsListAdapter.setData(eventsList)
+        }
     }
+
 
     override fun onClickPosition(position: Int, event: Event) {
 
     }
 
     override fun updateEventRating(position: Int, event: Event, newRating: Int) {
-        EventsRepository.updateRating(event, newRating)
-        eventsListRecyclerView.adapter?.notifyItemChanged(position)
+        event.rating = newRating
+        eventViewModel.updateEvent(event)
     }
 
     override fun removeEvent(position: Int, event: Event) {
-        EventsRepository.remove(event)
+        eventViewModel.deleteEvent(event)
         eventsListRecyclerView.adapter?.notifyItemRemoved(position)
     }
 

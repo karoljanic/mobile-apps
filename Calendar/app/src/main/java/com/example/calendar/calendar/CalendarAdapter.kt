@@ -1,17 +1,25 @@
 package com.example.calendar.calendar
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calendar.OneDayActivity
 import com.example.calendar.R
+import com.example.calendar.event.Event
+import com.example.calendar.event.EventViewModel
 import com.example.calendar.event.EventsRepository
 import java.time.LocalDate
+import java.util.stream.Collectors
 import kotlin.math.roundToInt
 
 class CalendarAdapter(
     private val daysOfMonth: ArrayList<LocalDate?>,
-    private val calendarRecyclerViewInterface: CalendarRecyclerViewInterface
+    private val calendarRecyclerViewInterface: CalendarRecyclerViewInterface,
+    private val eventViewModel: EventViewModel
 ) : RecyclerView.Adapter<CalendarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -44,8 +52,9 @@ class CalendarAdapter(
             else
                 holder.dayOfMonthLayout.setBackgroundResource(R.color.white)
 
-            if(EventsRepository.get(localDate).isNotEmpty())
+            if(eventViewModel.getEventsNumber(localDate) > 0)
                 holder.dayOfMonthBar.setBackgroundResource(R.color.mint)
+
             else if(localDate == LocalDate.now())
                 holder.dayOfMonthBar.setBackgroundResource(R.color.yellow_green)
             else

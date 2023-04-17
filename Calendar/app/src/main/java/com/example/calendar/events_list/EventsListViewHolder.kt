@@ -17,7 +17,7 @@ import kotlin.coroutines.coroutineContext
 class EventsListViewHolder(
     view: View,
     private val eventsListRecyclerViewInterface: EventsListRecyclerViewInterface,
-    private val events: ArrayList<Event>
+    private val events: List<Event>
 ) : RecyclerView.ViewHolder(view) {
 
     var eventLayout: ConstraintLayout = view.findViewById(R.id.eventLayout)

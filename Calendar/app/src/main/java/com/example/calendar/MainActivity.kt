@@ -33,12 +33,9 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
             setMonthView()
         }
 
-        //    if (savedInstanceState != null) {
-        //        val events: ArrayList<Event> = savedInstanceState.getParcelableArrayList("events")!!
-        //        EventsRepository.initialize(events)
-        //    }
-
-        CalendarUtils.currentDate = LocalDate.now()
+        if (savedInstanceState == null)
+            CalendarUtils.currentDate = LocalDate.now()
+        else CalendarUtils.currentDate = LocalDate.parse(savedInstanceState.getString("current-date"))
 
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView)
         monthYearText = findViewById(R.id.monthYearText)
@@ -62,16 +59,15 @@ class MainActivity : AppCompatActivity(), CalendarRecyclerViewInterface {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        //    outState.run {
-        //        putParcelableArrayList("events", EventsRepository.getAll())
-        //    }
+        outState.run {
+            putString("current-date", CalendarUtils.currentDate.toString())
+        }
 
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        //    val events: ArrayList<Event> = savedInstanceState.getParcelableArrayList("events")!!
-        //    EventsRepository.initialize(events)
+        CalendarUtils.currentDate = LocalDate.parse(savedInstanceState.getString("current-date"))
 
         super.onRestoreInstanceState(savedInstanceState)
     }

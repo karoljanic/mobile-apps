@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "682438349772",
+    "project_id": "spaceinvaders-48564",
+    "storage_bucket": "spaceinvaders-48564.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682438349772:android:734df55feef2b6657dc369",
+        "android_client_info": {
+          "package_name": "com.example.spaceinvaders"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Z0zuWQ_pFQFPtnn80IBcFIZlZODFBcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682438349772:android:e042180eefeb82f67dc369",
+        "android_client_info": {
+          "package_name": "com.example.spaceinvaderslight"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Z0zuWQ_pFQFPtnn80IBcFIZlZODFBcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
